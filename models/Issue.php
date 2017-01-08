@@ -15,13 +15,13 @@ use Yii;
  * @property string $create_time
  * @property integer $urgency_id
  * @property string $attachment
- * @property integer $user_user_id
+ * @property integer $user_id
  *
  * @property Activity[] $activities
  * @property Engineer $engineer
  * @property Subcategory $subcategory
  * @property Urgency $urgency
- * @property User $userUser
+ * @property User $user
  */
 class Issue extends \yii\db\ActiveRecord
 {
@@ -39,14 +39,14 @@ class Issue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['engineer_id', 'subcategory_id', 'urgency_id', 'user_user_id'], 'required'],
-            [['engineer_id', 'subcategory_id', 'urgency_id', 'user_user_id'], 'integer'],
+            [['engineer_id', 'subcategory_id', 'urgency_id', 'user_id'], 'required'],
+            [['engineer_id', 'subcategory_id', 'urgency_id', 'user_id'], 'integer'],
             [['create_time'], 'safe'],
             [['title', 'description', 'attachment'], 'string', 'max' => 45],
             [['engineer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Engineer::className(), 'targetAttribute' => ['engineer_id' => 'engineer_id']],
             [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategory::className(), 'targetAttribute' => ['subcategory_id' => 'subcategory_id']],
             [['urgency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Urgency::className(), 'targetAttribute' => ['urgency_id' => 'urgency_id']],
-            [['user_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_user_id' => 'user_id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'user_id']],
         ];
     }
 
@@ -56,15 +56,15 @@ class Issue extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'issue_id' => 'Issue ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'engineer_id' => 'Engineer ID',
-            'subcategory_id' => 'Subcategory ID',
-            'create_time' => 'Create Time',
-            'urgency_id' => 'Urgency ID',
-            'attachment' => 'Attachment',
-            'user_user_id' => 'User User ID',
+            'issue_id' => Yii::t('app', 'Issue ID'),
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
+            'engineer_id' => Yii::t('app', 'Engineer ID'),
+            'subcategory_id' => Yii::t('app', 'Subcategory ID'),
+            'create_time' => Yii::t('app', 'Create Time'),
+            'urgency_id' => Yii::t('app', 'Urgency ID'),
+            'attachment' => Yii::t('app', 'Attachment'),
+            'user_id' => Yii::t('app', 'User ID'),
         ];
     }
 
@@ -73,7 +73,7 @@ class Issue extends \yii\db\ActiveRecord
      */
     public function getActivities()
     {
-        return $this->hasMany(Activity::className(), ['issue_id' => 'issue_id', 'issue_engineer_id' => 'engineer_id', 'issue_user_id' => 'user_user_id']);
+        return $this->hasMany(Activity::className(), ['issue_id' => 'issue_id', 'issue_engineer_id' => 'engineer_id', 'issue_user_id' => 'user_id']);
     }
 
     /**
@@ -103,17 +103,8 @@ class Issue extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserUser()
+    public function getUser()
     {
-        return $this->hasOne(User::className(), ['user_id' => 'user_user_id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return IssueQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new IssueQuery(get_called_class());
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
 }

@@ -18,8 +18,8 @@ class EngineerSearch extends Engineer
     public function rules()
     {
         return [
-            [['engineer_id'], 'integer'],
-            [['designation'], 'safe'],
+            [['engineer_id', 'hd_designation_id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -60,9 +60,10 @@ class EngineerSearch extends Engineer
         // grid filtering conditions
         $query->andFilterWhere([
             'engineer_id' => $this->engineer_id,
+            'hd_designation_id' => $this->hd_designation_id,
         ]);
 
-        $query->andFilterWhere(['like', 'designation', $this->designation]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

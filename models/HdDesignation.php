@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "hd_designation".
+ * This is the model class for table "hddesignation".
  *
  * @property integer $hd_designation_id
  * @property string $name
  *
  * @property Engineer[] $engineers
  */
-class HdDesignation extends \yii\db\ActiveRecord
+class Hddesignation extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'hd_designation';
+        return 'hddesignation';
     }
 
     /**
@@ -53,10 +53,10 @@ class HdDesignation extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return HdDesignationQuery the active query used by this AR class.
+     * @return HddesignationQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new HdDesignationQuery(get_called_class());
+        return new HddesignationQuery(get_called_class());
     }
 }

@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Issue;
 
+
 /**
  * IssueSearch represents the model behind the search form about `app\models\Issue`.
  */
@@ -18,8 +19,8 @@ class IssueSearch extends Issue
     public function rules()
     {
         return [
-            [['issue_id', 'user_id', 'engineer_id', 'subcategory_id', 'status_id'], 'integer'],
-            [['title', 'description', 'create_time', 'urgency', 'attachment'], 'safe'],
+            [['issue_id', 'engineer_id', 'subcategory_id', 'urgency_id', 'user_id'], 'integer'],
+            [['title', 'description', 'create_time', 'attachment'], 'safe'],
         ];
     }
 
@@ -60,16 +61,15 @@ class IssueSearch extends Issue
         // grid filtering conditions
         $query->andFilterWhere([
             'issue_id' => $this->issue_id,
-            'user_id' => $this->user_id,
             'engineer_id' => $this->engineer_id,
             'subcategory_id' => $this->subcategory_id,
-            'status_id' => $this->status_id,
             'create_time' => $this->create_time,
+            'urgency_id' => $this->urgency_id,
+            'user_id' => $this->user_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'urgency', $this->urgency])
             ->andFilterWhere(['like', 'attachment', $this->attachment]);
 
         return $dataProvider;

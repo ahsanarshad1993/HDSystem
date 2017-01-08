@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[HdDesignation]].
+ * This is the ActiveQuery class for [[Hddesignation]].
  *
- * @see HdDesignation
+ * @see Hddesignation
  */
-class HdDesignationQuery extends \yii\db\ActiveQuery
+class HddesignationQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class HdDesignationQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return HdDesignation[]|array
+     * @return Hddesignation[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class HdDesignationQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return HdDesignation|array|null
+     * @return Hddesignation|array|null
      */
     public function one($db = null)
     {

@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Subcategory */
@@ -15,11 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
-
-    <?= $form->dropDownList($model, 'category_id', Html::listData(Category::model()->findAll(), 'category_id', 'name')); ?>
-
-
+    <!-- <?php  //echo $form->field($model, 'category_id')->textInput() ?> -->
+	<div class="form-group">
+        <label class="control-label" for="subcategory-category_id">Category</label>
+        <?= Html::activeDropDownList($model, 'category_id', ArrayHelper::map(Category::find()->all(), 'category_id', 'name'), ['class' => 'form-control']) ?>
+    </div>
+	
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
